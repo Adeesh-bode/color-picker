@@ -1,25 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from "react";
+import { SketchPicker } from "react-color";
 
 function App() {
+  const [currentColor, setCurrentColor] = useState("#4FDBCC");
+
+  const handleOnChange = (color) => {
+    setCurrentColor(color.hex);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={{ backgroundColor: currentColor }}>
+      <h1 className='title'>Color-Picker Tool</h1>
+      <SketchPicker
+        color={currentColor}
+        onChangeComplete={handleOnChange}
+        className="picker"
+      />
+      <button className='btn'>Color Hex-Code:<span className='hex'> { currentColor } </span></button>
     </div>
   );
 }
 
+
+// npm install react-color
+// import SketchPicker from react-color
 export default App;
